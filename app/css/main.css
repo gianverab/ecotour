@@ -1,5 +1,19 @@
+$blue: #2f5572;
+
 *{
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+}
+form{
+	border: 1px solid salmon;
+
+	input{
+		border-radius: 4px;
+		columns: 300px 2;
+	}
+}
+
+a:link{
+	color: $blue;
 }

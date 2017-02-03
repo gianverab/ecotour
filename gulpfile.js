@@ -1,6 +1,9 @@
 //Include Dependencies
 
 var gulp = require('gulp'),
+postcss = require('gulp-postcss'),
+cssvars = require('postcss-simple-vars'),
+nested = require('postcss-nested'),
 autoprefixer = require('gulp-autoprefixer'),
 concatcss = require('gulp-concat-css'),
 cssnano = require('gulp-cssnano'),
@@ -18,6 +21,7 @@ var paths = {
 gulp.task('styles', function(){
 	return gulp.src(paths.src + 'css/**/*.css')
 		.pipe(sourcemaps.init())
+		.pipe(postcss([cssvars, nested]))
 		.pipe(autoprefixer({
 				browsers: ['last 10 versions'],
 				cascade: false
