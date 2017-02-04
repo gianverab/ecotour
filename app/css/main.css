@@ -1,18 +1,8 @@
 
-$darkGrey: #333;
-
-body{
-	font-family: 'Roboto', sans-serif;
-	color: $darkGrey;
-}
-
 *{
-	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
-img{
-	max-width: 100%;
-	height: auto;
-}
+
 
