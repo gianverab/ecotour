@@ -7,6 +7,7 @@ autoprefixer = require('gulp-autoprefixer'),
 concatcss = require('gulp-concat-css'),
 rename = require('gulp-rename'),
 sourcemaps = require('gulp-sourcemaps'),
+del = require('del'),
 browsersync = require('browser-sync').create();
 
 //Include Paths
@@ -14,6 +15,11 @@ var paths = {
 	src: './app/',
 	build: './build/'
 }
+
+//Clean task
+gulp.task('clean', function() {
+	return del([paths.build]);
+});
 
 //CSS Workflow
 gulp.task('styles', function(){
@@ -53,4 +59,4 @@ gulp.task('serve', ['styles', 'html', 'images'], function (){
 });
 
 //Default gulp command
-gulp.task('default', ['serve']);
+gulp.task('default', ['clean', 'serve']);
