@@ -1,19 +1,18 @@
-$blue: #2f5572;
+
+$darkGrey: #333;
+
+body{
+	font-family: 'Roboto', sans-serif;
+	color: $darkGrey;
+}
 
 *{
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
-form{
-	border: 1px solid salmon;
-
-	input{
-		border-radius: 4px;
-		columns: 300px 2;
-	}
+img{
+	max-width: 100%;
+	height: auto;
 }
 
-a:link{
-	color: $blue;
-}
