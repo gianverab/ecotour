@@ -36,8 +36,14 @@ gulp.task('html', function(){
 	    .pipe(gulp.dest(paths.build));
 });
 
+//Images
+gulp.task('images', function(){
+	return gulp.src(paths.src + 'img/*')
+	  .pipe(gulp.dest(paths.build + 'img/'));
+});
+
 //Server set up and reload
-gulp.task('serve', ['styles', 'html'], function (){
+gulp.task('serve', ['styles', 'html', 'images'], function (){
 	browsersync.init({
 		server: paths.build
 	});
