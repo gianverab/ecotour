@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 postcss = require('gulp-postcss'),
 cssvars = require('postcss-simple-vars'),
 nested = require('postcss-nested'),
-concatcss = require('gulp-concat-css'),
+importcss = require('postcss-import'),
 autoprefixer = require('gulp-autoprefixer'),
 rename = require('gulp-rename'),
 sourcemaps = require('gulp-sourcemaps'),
@@ -17,14 +17,13 @@ var paths = {
 
 //CSS Workflow
 gulp.task('styles', function(){
-	return gulp.src(paths.src + 'css/**/*.css')
+	return gulp.src(paths.src + 'css/*.css')
 		.pipe(sourcemaps.init())
-		.pipe(postcss([cssvars, nested]))
+		.pipe(postcss([importcss, cssvars, nested]))
 		.pipe(autoprefixer({
 				browsers: ['last 10 versions'],
 				cascade: false
 			}))
-		.pipe(concatcss('all.css'))
 		.pipe(rename('app.min.css'))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(paths.build + 'css/'));

@@ -1,8 +1,7 @@
+@import "normalize.css";
+@import "partials/_global";
+@import "partials/_large-hero";
 
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+
 
 
