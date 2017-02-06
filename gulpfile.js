@@ -6,6 +6,8 @@ nested = require('postcss-nested'),
 importcss = require('postcss-import'),
 autoprefixer = require('gulp-autoprefixer'),
 rename = require('gulp-rename'),
+newer = require('gulp-newer'),
+imagemin = require('gulp-imagemin'),
 sourcemaps = require('gulp-sourcemaps'),
 browsersync = require('browser-sync').create();
 
@@ -35,10 +37,12 @@ gulp.task('html', function(){
 	    .pipe(gulp.dest(paths.build));
 });
 
-//Images
+//Minify any new images
 gulp.task('images', function(){
-	return gulp.src(paths.src + 'img/**/*')
-	  .pipe(gulp.dest(paths.build + 'img/'));
+  return gulp.src(paths.src + 'img/*')
+  	.pipe(newer(paths.build + 'img/'))
+    .pipe(imagemin({ optimizationLevel: 5 }))
+    .pipe(gulp.dest(paths.build + 'img/'));
 });
 
 //Server set up and reload
