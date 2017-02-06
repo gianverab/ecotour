@@ -12,14 +12,16 @@ sourcemaps = require('gulp-sourcemaps'),
 browsersync = require('browser-sync').create();
 
 //Include Paths
-var paths = {
-	src: './app/',
-	build: './build/'
-}
+var cssSrc = './app/css/*.css',
+cssDest = './build/css/',
+imgSrc = './app/img/*',
+imgDest = './build/img/',
+htmlSrc = './app/*.html',
+build = './build/';
 
 //CSS Workflow
 gulp.task('styles', function(){
-	return gulp.src(paths.src + 'css/*.css')
+	return gulp.src(cssSrc)
 		.pipe(sourcemaps.init())
 		.pipe(postcss([importcss, cssvars, nested]))
 		.pipe(autoprefixer({
@@ -28,32 +30,34 @@ gulp.task('styles', function(){
 			}))
 		.pipe(rename('app.min.css'))
 		.pipe(sourcemaps.write('./'))
-		.pipe(gulp.dest(paths.build + 'css/'));
+		.pipe(gulp.dest(cssDest));
 });
 
 //HTML Workflow
 gulp.task('html', function(){
-	return gulp.src(paths.src + '*.html')
-	    .pipe(gulp.dest(paths.build));
+	return gulp.src(htmlSrc)
+	    .pipe(gulp.dest(build));
 });
 
 //Minify any new images
 gulp.task('images', function(){
-  return gulp.src(paths.src + 'img/*')
-  	.pipe(newer(paths.build + 'img/'))
-    .pipe(imagemin({ optimizationLevel: 5 }))
-    .pipe(gulp.dest(paths.build + 'img/'));
+  return gulp.src(imgSrc)
+  	.pipe(newer(imgDest))
+    .pipe(imagemin({ 
+    	optimizationLevel: 5 
+    }))
+    .pipe(gulp.dest(imgDest));
 });
 
 //Server set up and reload
 gulp.task('serve', ['styles', 'html', 'images'], function (){
 	browsersync.init({
-		server: paths.build
+		server: build
 	});
-	gulp.watch(paths.src + 'css/**/*.css', ['styles']); 
-	gulp.watch(paths.build + 'css/**/*.css').on('change', browsersync.reload);
-	gulp.watch(paths.src + '*.html', ['html']);
-	gulp.watch(paths.build + '*.html').on('change', browsersync.reload);
+	gulp.watch(cssSrc, ['styles']); 
+	gulp.watch(cssDest).on('change', browsersync.reload);
+	gulp.watch(htmlSrc, ['html']);
+	gulp.watch(build + '*.html').on('change', browsersync.reload);
 });
 
 //Default gulp command
