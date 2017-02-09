@@ -54,8 +54,8 @@ gulp.task('serve', ['styles', 'html', 'images'], function (){
 	browsersync.init({
 		server: build
 	});
-	gulp.watch(cssSrc, ['styles']); 
-	gulp.watch(cssDest).on('change', browsersync.reload);
+	gulp.watch('./app/css/**/*.css', ['styles']); 
+	gulp.watch('./build/css/*.css').on('change', browsersync.reload);
 	gulp.watch(htmlSrc, ['html']);
 	gulp.watch(build + '*.html').on('change', browsersync.reload);
 });
